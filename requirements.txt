@@ -1,0 +1,4 @@
+gunicorn
+dash
+dash_core_components
+matplotlib
