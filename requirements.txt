@@ -1,4 +1,5 @@
 gunicorn
 dash
-dash_core_components
+dash-bootstrap-components>=0.10.1
 matplotlib
+heroku
