@@ -13,10 +13,14 @@ documentation: https://dash.plot.ly/urls
 import dash
 import dash_bootstrap_components as dbc
 from dash import Input, Output, dcc, html
-import subpages
+import subpages.savokos
+import subpages.taisykles
+import subpages.uzdaviniai
+import subpages.sprendimai
+import subpages.atvejai
+import subpages.kursas
 
 app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
-server = app.server
 
 # the style arguments for the sidebar. We use position:fixed and a fixed width
 SIDEBAR_STYLE = {
@@ -85,5 +89,6 @@ def render_page_content(pathname):
         ]
     )
 
-#server = app.server
+server = app.server
+#if __name__ == '__main__': app.run_server(debug=True, port = 8870)
 
