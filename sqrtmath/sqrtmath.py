@@ -15,6 +15,7 @@ import dash_bootstrap_components as dbc
 from dash import Input, Output, dcc, html
 
 app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
+server = app.server
 
 # the style arguments for the sidebar. We use position:fixed and a fixed width
 SIDEBAR_STYLE = {
@@ -77,5 +78,5 @@ def render_page_content(pathname):
         ]
     )
 
-server = app.server
+#server = app.server
 
