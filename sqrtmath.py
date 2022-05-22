@@ -81,6 +81,7 @@ def render_page_content(pathname):
     elif pathname == "/atvejai": return subpages.atvejai.create_view()
     elif pathname == "/kursas": return subpages.kursas.create_view()
     # If the user tries to reach a different page, return a 404 message
+    """
     return dbc.Jumbotron(
         [
             html.H1("404: Not found", className="text-danger"),
@@ -88,6 +89,7 @@ def render_page_content(pathname):
             html.P(f"The pathname {pathname} was not recognised..."),
         ]
     )
+    """
 
 server = app.server
 #if __name__ == '__main__': app.run_server(debug=True, port = 8870)
