@@ -1,7 +1,6 @@
 import dash
 import dash_cytoscape as cyto
 from dash import html, dcc
-from dash.dependencies import Input, Output
 
 #demo for adding urls: https://stackoverflow.com/a/69700675/3044825
 cyto.load_extra_layouts() #dagre layout
