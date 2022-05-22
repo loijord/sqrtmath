@@ -1,1 +1,1 @@
-web: gunicorn sqrtmath/sqrtmath:server
+web: gunicorn sqrtmath:server
