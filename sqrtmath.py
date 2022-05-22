@@ -13,6 +13,7 @@ documentation: https://dash.plot.ly/urls
 import dash
 import dash_bootstrap_components as dbc
 from dash import Input, Output, dcc, html
+import subpages
 
 app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
 server = app.server
@@ -46,8 +47,12 @@ sidebar = html.Div(
         dbc.Nav(
             [
                 dbc.NavLink("Home", href="/", active="exact"),
-                dbc.NavLink("Page 1", href="/page-1", active="exact"),
-                dbc.NavLink("Page 2", href="/page-2", active="exact"),
+                dbc.NavLink("Sąvokos", href="/savokos", active="exact"),
+                dbc.NavLink("Taisyklės", href="/taisyklės", active="exact"),
+                dbc.NavLink("Uždaviniai", href="/uzdaviniai", active="exact"),
+                dbc.NavLink("Sprendimai", href="/sprendimai", active="exact"),
+                dbc.NavLink("Atvejai", href="/atvejai", active="exact"),
+                dbc.NavLink("Kursas", href="/kursas", active="exact"),
             ],
             vertical=True,
             pills=True,
@@ -64,11 +69,13 @@ app.layout = html.Div([dcc.Location(id="url"), sidebar, content])
 @app.callback(Output("page-content", "children"), [Input("url", "pathname")])
 def render_page_content(pathname):
     if pathname == "/":
-        return html.P("This is the content of the home page!")
-    elif pathname == "/page-1":
-        return html.P("This is the content of page 1. Yay!")
-    elif pathname == "/page-2":
-        return html.P("Oh cool, this is page 2!")
+        return html.P("Tai - pirmoji testinė puslapio, skirto studijuoti matematikai, versija!")
+    elif pathname == "/savokos": return subpages.savokos.create_view()
+    elif pathname == "/taisykles": return subpages.taisykles.create_view()
+    elif pathname == "/uzdaviniai": return subpages.uzdaviniai.create_view()
+    elif pathname == "/sprendimai": return subpages.sprendimai.create_view()
+    elif pathname == "/atvejai": return subpages.atvejai.create_view()
+    elif pathname == "/kursas": return subpages.kursas.create_view()
     # If the user tries to reach a different page, return a 404 message
     return dbc.Jumbotron(
         [
