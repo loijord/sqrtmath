@@ -12,74 +12,60 @@ documentation: https://dash.plot.ly/urls
 """
 import dash
 import dash_bootstrap_components as dbc
-from dash import Input, Output, dcc, html
-import subpages.savokos
-import subpages.taisykles
-import subpages.uzdaviniai
-import subpages.sprendimai
-import subpages.atvejai
-import subpages.kursas
+from dash import Input, Output, dcc, html, callback
+from utils.dry import cut
 
-app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
+import pages.home
+import pages.savokos
+import pages.taisykles
+import pages.uzdaviniai
+import pages.sprendimai
+import pages.atvejai
+import pages.kursas
+import pages.mokiniai
+import pages.mokesciai
 
-# the style arguments for the sidebar. We use position:fixed and a fixed width
-SIDEBAR_STYLE = {
-    "position": "fixed",
-    "top": 0,
-    "left": 0,
-    "bottom": 0,
-    "width": "16rem",
-    "padding": "2rem 1rem",
-    "background-color": "#f8f9fa",
-}
+from utils.stylesheet import SIDEBAR_STYLE, CONTENT_STYLE
 
-# the styles for the main content position it to the right of the sidebar and
-# add some padding.
-CONTENT_STYLE = {
-    "margin-left": "18rem",
-    "margin-right": "2rem",
-    "padding": "2rem 1rem",
-}
-
+app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP],
+                suppress_callback_exceptions=True)
 sidebar = html.Div(
     [
-        html.H2("Sidebar", className="display-4"),
+        #html.H2("Sidebar", className="display-4"),
+        dcc.Markdown(r'$\Huge \sqrt{MATH}$', mathjax=True),
         html.Hr(),
-        html.P(
-            "A simple sidebar layout with navigation links", className="lead"
-        ),
-        dbc.Nav(
-            [
-                dbc.NavLink("Home", href="/", active="exact"),
+        #html.P("A simple sidebar layout with navigation links", className="lead"),
+        dbc.Nav([dbc.NavLink("Home", href="/", active="exact"),
                 dbc.NavLink("Sąvokos", href="/savokos", active="exact"),
-                dbc.NavLink("Taisyklės", href="/taisyklės", active="exact"),
+                dbc.NavLink("Taisyklės", href="/taisykles", active="exact"),
                 dbc.NavLink("Uždaviniai", href="/uzdaviniai", active="exact"),
                 dbc.NavLink("Sprendimai", href="/sprendimai", active="exact"),
                 dbc.NavLink("Atvejai", href="/atvejai", active="exact"),
                 dbc.NavLink("Kursas", href="/kursas", active="exact"),
-            ],
-            vertical=True,
-            pills=True,
-        ),
-    ],
+                dbc.NavLink("Mokiniai", href="/mokiniai", active="exact"),
+                dbc.NavLink("Mokesčiai", href="/mokesciai", active="exact")],
+            vertical=True, pills=True,)],
     style=SIDEBAR_STYLE,
 )
 
 content = html.Div(id="page-content", style=CONTENT_STYLE)
-
 app.layout = html.Div([dcc.Location(id="url"), sidebar, content])
 
-
-@app.callback(Output("page-content", "children"), [Input("url", "pathname")])
+@callback(Output("page-content", "children"), [Input("url", "pathname")])
 def render_page_content(pathname):
-    if pathname == "/":
-        return html.P("Tai - pirmoji testinė puslapio, skirto studijuoti matematikai, versija!")
-    elif pathname == "/savokos": return subpages.savokos.create_view()
-    elif pathname == "/taisykles": return subpages.taisykles.create_view()
-    elif pathname == "/uzdaviniai": return subpages.uzdaviniai.create_view()
-    elif pathname == "/sprendimai": return subpages.sprendimai.create_view()
-    elif pathname == "/atvejai": return subpages.atvejai.create_view()
-    elif pathname == "/kursas": return subpages.kursas.create_view()
+    front_layout = html.P("The sqrt command produces the square root (radical) symbol")
+    if pathname == "/": return front_layout
+    elif pathname == "/savokos": return pages.savokos.create_view()
+    elif pathname == "/taisykles": return pages.taisykles.create_view()
+    elif pathname == "/uzdaviniai": return pages.uzdaviniai.create_view()
+    elif pathname == "/sprendimai": return pages.sprendimai.create_view()
+    elif pathname == "/atvejai": return pages.atvejai.create_view()
+    elif pathname == "/kursas": return pages.kursas.create_view()
+    elif pathname == '/mokiniai':
+        return pages.mokiniai.layout
+    elif pathname == '/mokesciai':
+        return pages.mokesciai.layout
+
     # If the user tries to reach a different page, return a 404 message
     """
     return dbc.Jumbotron(
@@ -91,6 +77,6 @@ def render_page_content(pathname):
     )
     """
 
-server = app.server
-#if __name__ == '__main__': app.run_server(debug=True, port = 8870)
+#server = app.server
+if __name__ == '__main__': app.run_server(debug=True, port = 8870)
 

@@ -1,6 +1,0 @@
-gunicorn
-dash
-dash-bootstrap-components>=0.10.1
-dash_cytoscape
-matplotlib
-heroku
