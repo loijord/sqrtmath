@@ -62,5 +62,5 @@ app.layout = html.Div([
         autounselectify=True
     )])
 
-server = app.server
-#if __name__ == "__main__":  app.run_server(port=8906)
+
+if __name__ == "__main__":  app.run_server(port=8906)

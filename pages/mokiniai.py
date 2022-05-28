@@ -12,8 +12,8 @@ sidebar = html.Div(
         html.Hr(),
         #html.P("A simple sidebar layout with navigation links", className="lead"),
         dbc.Nav([dbc.NavLink("About", href="/mokiniai", active="exact"),
-                dbc.NavLink("Ieva", href="/ieva", active="exact"),
-                dbc.NavLink("Mantas ir Ugnė", href="/mantas_ir_ugne", active="exact")],
+                dbc.NavLink("Ieva", href="/mokiniai/ieva", active="exact"),
+                dbc.NavLink("Mantas ir Ugnė", href="/mokiniai/mantas_ir_ugne", active="exact")],
             vertical=True, pills=True,)],
     style=SIDEBAR_STYLE,
 )
@@ -36,11 +36,11 @@ def display_content(pathname):
     front_layout = html.P("sqrtmath - vieta, kur mokosi, kas tik tik nori")
     if pathname == "/mokiniai":
         return front_layout
-    elif pathname == "/ieva":
+    elif pathname == "/mokiniai/ieva":
         ieva = html.P("sqrtmath - vieta, kur mokosi ieva")
         print(ieva)
         return ieva
-    elif pathname == "/mantas_ir_ugne":
+    elif pathname == "/mokiniai/mantas_ir_ugne":
         mantas = html.P("sqrtmath - vieta, kur mokosi mantas")
         print(mantas)
         return mantas

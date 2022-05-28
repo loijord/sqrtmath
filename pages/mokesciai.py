@@ -1,7 +1,5 @@
 import plotly.express as px
 from dash import html, dcc, dash_table
-
-
 import pandas as pd
 df = pd.DataFrame([[0, 0, 0, 17.39, 3.8, 1.26],
                    [0, 20.66, 0, 17.39, 6.54, 1.19],
@@ -13,10 +11,11 @@ df = pd.DataFrame([[0, 0, 0, 17.39, 3.8, 1.26],
                    [151.24, 18.84, 6.07, 17.39, 7.68, 1.36],
                    [107.86, 36.77, 7.39, 17.39, 8.02, 1.36]],
                   index=['rugpjūtis', 'rugsėjis', 'spalis', 'lapkritis', 'gruodis', 'sausis', 'vasaris', 'kovas', 'balandis'],
-                  columns=['šilima', 'admin', 'vanduo', 'internetas', 'elektra', 'dujos'])
+                  columns=['šildymas', 'admin', 'vanduo', 'internetas', 'elektra', 'dujos'])
 
 df['total'] = df.sum(axis=1).round(decimals=3)
-df['average'] = df['total'].mean().round(decimals=3)
+df['9 praeitų mėn. average'] = df['total'].mean().round(decimals=2)
+df['teorinis 12 mėn. average'] = round((df['total'].sum()+3*70.93)/12, 2)
 df.reset_index(inplace=True)
 df.rename(columns={"index":'mėnuo'}, inplace=True)
 df_table = dash_table.DataTable(data=df.to_dict('records'),
@@ -27,7 +26,7 @@ df_table = dash_table.DataTable(data=df.to_dict('records'),
                                     },
                                 fill_width=True)
 
-fig = px.line(df, x=df["mėnuo"], y=df.columns[[1,-2,-1]], markers=True)
+fig = px.line(df, x=df["mėnuo"], y=df.columns[[1,-3,-2,-1]], markers=True)
 
 
 layout = html.Div(children=[df_table, dcc.Graph(id='example', figure=fig)])
