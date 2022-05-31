@@ -1,7 +1,5 @@
 import dash_cytoscape as cyto
-from dash import html, dcc, callback, Input, Output
-from utils.stylesheet import SIDEBAR, CONTENT_STYLE
-import pages.mantas_ir_ugne
+from dash import html
 
 #demo for adding urls: https://stackoverflow.com/a/69700675/3044825
 cyto.load_extra_layouts() #dagre layout
@@ -51,9 +49,8 @@ stylesheet = [
                'width': 75}}]
 
 
-sidebar = SIDEBAR('Mokiniai', {"Ieva": "/mokiniai/ieva", "Mantas ir Ugnė": "/mokiniai/mantas_ir_ugne"})
 content = html.Div([
-        #dcc.Location(id="ieva-content"),
+        #dcc.Location(id="ieva-content"), #This causes serious injuries
         cyto.Cytoscape(
             id='cytoscape',
             layout={'name': 'dagre', 'spacingFactor': 1.15},
@@ -63,9 +60,4 @@ content = html.Div([
             autounselectify=True
         )])
 
-#content = html.Div(id="ieva-content")
-#layout = html.Div([sidebar, content])
-layout = html.P("vieta Ievai")
-print('atsipisk nuo to seno layout pagaliau', layout)
-#layout = html.P("vieta Ievai")
-#html.Div([dcc.Location(id="ieva-url"), sidebar, content])
+

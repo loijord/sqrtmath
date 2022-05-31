@@ -1,4 +1,5 @@
-def cut(pathname):
-    head, *tail = pathname.strip('/').split('/')
-    tailname = '/'.join(tail)
-    return head, tailname
+import dash_bootstrap_components as dbc
+
+def nav(links):
+    return dbc.Nav([dbc.NavLink(key, href=val, active="exact") for key, val in links.items()],
+                   vertical=True, pills=True)

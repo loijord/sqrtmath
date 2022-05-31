@@ -27,9 +27,5 @@ df_table = dash_table.DataTable(data=df.to_dict('records'),
                                 fill_width=True)
 
 fig = px.line(df, x=df["mėnuo"], y=df.columns[[1,-3,-2,-1]], markers=True)
+content = html.Div(children=[df_table, dcc.Graph(id='example', figure=fig)])
 
-
-layout = html.Div(children=[df_table, dcc.Graph(id='example', figure=fig)])
-
-#layout = html.P("vieta Ievai")
-#html.Div([dcc.Location(id="ieva-url"), sidebar, content])

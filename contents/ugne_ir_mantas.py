@@ -1,6 +1,5 @@
 import dash_cytoscape as cyto
-from dash import html, dcc
-from utils.stylesheet import SIDEBAR, CONTENT_STYLE
+from dash import html
 
 #demo for adding urls: https://stackoverflow.com/a/69700675/3044825
 cyto.load_extra_layouts() #dagre layout
@@ -26,42 +25,17 @@ E9 = {'data': {'id': 'e9', 'source': 'p4', 'target': 'p1', 'label': 'Waste Treat
 nodes = [P1, P2, P3, P4, P5, P6, P7]
 edges = [E1, E2, E3, E4, E5, E6, E7, E8, E9]
 
-stylesheet = [
-    # Group selectors
-    {'selector': 'node', 'style': {'content': 'data(label)', 'font-size': 8}},
-    {'selector': 'edge',
-     'style': {'content': 'data(label)',
-               'curve-style': 'unbundled-bezier',
-               'width': 1,
-               'line-color': 'lightblue',
-               'target-arrow-color': 'lightblue',
-               'target-arrow-shape': 'triangle',
-               'text-margin-x': 0,
-               'font-size': 8}},
 
-    # Class selectors
-    {'selector': '.process',
-     'style': {'shape': 'round-rectangle',
-               'background-color': 'white',
-               'border-color': 'black',
-               'border-width': 1,
-               'text-valign': 'center',
-               'height': 40,
-               'width': 75}}]
-
-sidebar = SIDEBAR('Mokiniai', {"Ieva": "/mokiniai/ieva", "Mantas ir Ugnė": "/mokiniai/mantas_ir_ugne"})
 content = html.Div([
-        dcc.Location(id="ieva-content"),
+        #dcc.Location(id="ieva-content"), #This causes serious injuries
         cyto.Cytoscape(
             id='cytoscape',
             layout={'name': 'dagre', 'spacingFactor': 1.15},
             style={'width': '100%', 'height': '900px'},
-            stylesheet=stylesheet,
             elements=nodes + edges,
             autounselectify=True
         )])
-layout = html.Div([dcc.Location(id="ieva-url"), sidebar, content])
+#layout = html.Div([dcc.Location(id="ieva-url"), sidebar, content])
 
-def display_content(pathname):
-    print('im mantas', pathname)
-    #return html.Div([dcc.Location(id="mantas_ir_ugne"), sidebar, content])
+#def display_content(pathname): print('im mantas', pathname)
+#return html.Div([dcc.Location(id="mantas_ir_ugne"), sidebar, content])

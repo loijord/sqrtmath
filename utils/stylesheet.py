@@ -19,16 +19,15 @@ CONTENT_STYLE = {
     "padding": "2rem 1rem",
 }
 
-# sidebar itself
-def SIDEBAR(header, links):
-    sidebar = html.Div(
-        [
-            html.H2(header), #className="display-4"
-            html.Hr(),
-            dbc.Nav(
-                [dbc.NavLink(key, href=val, active="exact") for key, val in links.items()],
-                vertical=True,
-                pills=True,)],
-        style=SIDEBAR_STYLE,
-    )
-    return sidebar
+
+def JUMBOTRON(pathname):
+    jumbotron = html.Div(
+            [
+                html.H1("404: Not found", className="text-danger"),
+                html.Hr(),
+                html.P(f"The pathname {pathname} was not recognised..."),
+                dbc.Button("Go Back", color="light", outline=True),
+            ],
+            className="h-100 p-5 text-white bg-dark rounded-3",
+        )
+    return jumbotron
