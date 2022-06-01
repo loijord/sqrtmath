@@ -14,10 +14,9 @@ df = pd.DataFrame([[0, 0, 0, 17.39, 3.8, 1.26],
                   index=['rugpjūtis', 'rugsėjis', 'spalis', 'lapkritis', 'gruodis', 'sausis', 'vasaris', 'kovas', 'balandis', 'gegužė'],
                   columns=['šildymas', 'admin', 'vanduo', 'internetas', 'elektra', 'dujos'])
 
-#Nuo gegužės galo brangsta admin: 1eu brangsta š/k. vandens priežiūra ir prisideda 14eu už parapetų keitimo darbai + stogo remontas
 df['total'] = df.sum(axis=1).round(decimals=3)
 df['9 praeitų mėn. average'] = df['total'].mean().round(decimals=2)
-df['teorinis 12 mėn. average'] = round((df['total'].sum()+3*70.93)/12, 2)
+df['teorinis 12 mėn. average'] = round((df['total'].sum()+2*100)/12, 2)
 df.reset_index(inplace=True)
 df.rename(columns={"index":'mėnuo'}, inplace=True)
 df_table = dash_table.DataTable(data=df.to_dict('records'),
