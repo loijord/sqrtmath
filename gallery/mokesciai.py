@@ -9,10 +9,12 @@ df = pd.DataFrame([[0, 0, 0, 17.39, 3.8, 1.26],
                    [141.32, 20.66, 3.43, 17.39, 10.35, 2.16],
                    [144.85, 24.03, 6.07, 17.39, 10.35, 2.16],
                    [151.24, 18.84, 6.07, 17.39, 7.68, 1.36],
-                   [107.86, 36.77, 7.39, 17.39, 8.02, 1.36]],
-                  index=['rugpjūtis', 'rugsėjis', 'spalis', 'lapkritis', 'gruodis', 'sausis', 'vasaris', 'kovas', 'balandis'],
+                   [107.86, 36.77, 7.39, 17.39, 8.02, 1.36],
+                   [92.46, 34.75, 10.82, 17.39, 6.85, 1.92]],
+                  index=['rugpjūtis', 'rugsėjis', 'spalis', 'lapkritis', 'gruodis', 'sausis', 'vasaris', 'kovas', 'balandis', 'gegužė'],
                   columns=['šildymas', 'admin', 'vanduo', 'internetas', 'elektra', 'dujos'])
 
+#Nuo gegužės galo brangsta admin: 1eu brangsta š/k. vandens priežiūra ir prisideda 14eu už parapetų keitimo darbai + stogo remontas
 df['total'] = df.sum(axis=1).round(decimals=3)
 df['9 praeitų mėn. average'] = df['total'].mean().round(decimals=2)
 df['teorinis 12 mėn. average'] = round((df['total'].sum()+3*70.93)/12, 2)

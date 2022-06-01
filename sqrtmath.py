@@ -4,8 +4,8 @@ from dash import Input, Output, dcc, html, callback
 
 import contents.home
 import contents.mokiniai
-import contents.mokesciai
 import contents.roadmap
+import contents.app_gallery
 
 import sidebars.home
 from utils.stylesheet import SIDEBAR_STYLE, CONTENT_STYLE, JUMBOTRON
@@ -24,10 +24,10 @@ def render_page_content(pathname):
     path = pathname.strip('/').split('/')
     if path[:1] == [""]: return sidebar, contents.home.content
     elif path[:1] == ["mokiniai"]: return contents.mokiniai.sidebar, contents.mokiniai.content
-    elif path[:1] == ["mokesciai"]: return sidebar, contents.mokesciai.content
     elif path[:1] == ["roadmap"]: return sidebar, contents.roadmap.content
+    elif path[:1] == ["gallery"]: return contents.app_gallery.sidebar, contents.app_gallery.content
     else: return sidebar, JUMBOTRON(pathname)
 
-server = app.server
-#if __name__ == '__main__': app.run_server(debug=True, port = 8870)
+#server = app.server
+if __name__ == '__main__': app.run_server(debug=True, port = 8870)
 

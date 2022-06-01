@@ -34,7 +34,8 @@ content = html.Div([
             style={'width': '100%', 'height': '900px'},
             elements=nodes + edges,
             autounselectify=True
-        )])
+        )], style={'background-image': 'url(https://upload.wikimedia.org/wikipedia/commons/2/22/North_Star_-_invitation_background.png)',
+                   'height': '200%'})
 #layout = html.Div([dcc.Location(id="ieva-url"), sidebar, content])
 
 #def display_content(pathname): print('im mantas', pathname)
