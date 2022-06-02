@@ -6,7 +6,7 @@ import gallery.html_object_collection, gallery.mokesciai, gallery.jumbotron, gal
 
 
 content_children = dcc.Markdown("""Ši sekcija skirta pademonstruoti, kokius appsus galima sukurti naudojant
- [`Dash` biblioteką](https://dash.plotly.com/"). Kiekvienoje skiltyje rasite veikiantį appsą, o apačioje - jo source kodą""")
+ [`Dash`](https://dash.plotly.com/) biblioteką. Kiekvienoje skiltyje rasite veikiantį appsą, o apačioje - jo source kodą""")
 
 sidebar = html.Div(children=sidebars.gallery.sections, id="gallery-sidebar", style=SIDEBAR_STYLE)
 content = html.Div(children=content_children, id="gallery-content")
