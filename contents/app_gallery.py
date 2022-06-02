@@ -1,9 +1,12 @@
-from dash import html, callback, Input, Output
+from dash import html, callback, Input, Output, dcc
 from utils.stylesheet import SIDEBAR_STYLE, JUMBOTRON
+from utils.dry import nice_app_display
 import sidebars.gallery
-import gallery.html_object_collection, gallery.mokesciai
+import gallery.html_object_collection, gallery.mokesciai, gallery.jumbotron, gallery.sidebar, gallery.interactive_graphs
 
-content_children=html.P("Čia sukelti appsai, kuriuos lengva sukodint")
+
+content_children = dcc.Markdown("""Ši sekcija skirta pademonstruoti, kokius appsus galima sukurti naudojant
+ [`Dash` biblioteką](https://dash.plotly.com/"). Kiekvienoje skiltyje rasite veikiantį appsą, o apačioje - jo source kodą""")
 
 sidebar = html.Div(children=sidebars.gallery.sections, id="gallery-sidebar", style=SIDEBAR_STYLE)
 content = html.Div(children=content_children, id="gallery-content")
@@ -16,7 +19,10 @@ content = html.Div(children=content_children, id="gallery-content")
 def display_content(pathname):
     path = pathname.strip('/').split('/')
     if path[:2] == ["gallery"]: return sidebar, content
-    elif path[:2] == ["gallery", "html_object_collection"]: return sidebar, gallery.html_object_collection.content
-    elif path[:2] == ["gallery", "mokesciai"]: return sidebar, gallery.mokesciai.content
+    elif path[:2] == ["gallery", "html_object_collection"]: return sidebar, nice_app_display(gallery.html_object_collection)
+    elif path[:2] == ["gallery", "mokesciai"]: return sidebar, nice_app_display(gallery.mokesciai)
+    elif path[:2] == ["gallery", "jumbotron"]: return sidebar, nice_app_display(gallery.jumbotron)
+    elif path[:2] == ["gallery", "sidebar"]: return sidebar, nice_app_display(gallery.sidebar)
+    elif path[:2] == ["gallery", "interactive_graphs"]: return sidebar, nice_app_display(gallery.interactive_graphs)
     else: return sidebar, JUMBOTRON(pathname)
 

@@ -1,8 +1,9 @@
-import dash
+#The concept: https://stackoverflow.com/questions/72003753
+#How to add labels for edges: https://github.com/plotly/dash-cytoscape/issues/174
+#How to add urls: https://stackoverflow.com/a/69700675/3044825
+
 import dash_cytoscape as cyto
 from dash import html, dcc
-
-#demo for adding urls: https://stackoverflow.com/a/69700675/3044825
 cyto.load_extra_layouts() #dagre layout
 
 P1 = {'data': {'id': 'p1', 'label': 'Use Bulb'}, 'grabbable': True, 'classes': 'process'}
@@ -49,9 +50,7 @@ stylesheet = [
                'height': 40,
                'width': 75}}]
 
-app = dash.Dash(__name__)
-
-app.layout = html.Div([
+content = html.Div([
     dcc.Location(id="location"),
     cyto.Cytoscape(
         id='cytoscape',
@@ -61,6 +60,3 @@ app.layout = html.Div([
         elements=nodes+edges,
         autounselectify=True
     )])
-
-
-if __name__ == "__main__":  app.run_server(port=8906)

@@ -35,5 +35,6 @@ content = html.Div([
             value=5,
         ),
     ], style={'padding': 10, 'flex': 1})
-], style={'display': 'flex', 'flex-direction': 'row'})
+], style={'display': 'flex', 'flex-direction': 'row'},
+className="h-100 p-5 text-white bg-dark rounded-3")
 

@@ -23,8 +23,7 @@ df_table = dash_table.DataTable(data=df.to_dict('records'),
                                 columns=[{"name": i, "id": i} for i in df.columns],
                                 style_data={
                                         'whiteSpace': 'normal',
-                                        'height': 'auto',
-                                    },
+                                        'height': 'auto'},
                                 fill_width=True)
 
 fig = px.line(df, x=df["mėnuo"], y=df.columns[[1,-3,-2,-1]], markers=True)
