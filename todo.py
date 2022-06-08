@@ -6,14 +6,10 @@ data = {r'$ax+by+c=0$':
     ('Kai $a=0$, tai turime vieno kintamojo tiesinę lygtį $by+c=0$',
      'Kai $b=0$, tai turime vieno kintamojo tiesinę lygtį $ax+c=0$'),
          'by': 'zero-scenario',
-         'scope': '1.9.5.1'},
-        }
+         'scope': '1.9.5.1'}}
 
 # Kursas
-data = {
-'tiesinė lygtis': '1.9.5.1',
-'kryptinė tiesinė lygtis': '1.9.5.1'
-}
+data = {'tiesinė lygtis': '1.9.5.1', 'kryptinė tiesinė lygtis': '1.9.5.1'}
 
 # Sąvokos
 data = {'tiesinė lygtis': r'lygtis, kurios pavidalas yra $ax+by+c=0$, $a \neq 0$ ir $b\neq 0$',

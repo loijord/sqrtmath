@@ -24,10 +24,10 @@ def render_page_content(pathname):
     path = pathname.strip('/').split('/')
     if path[:1] == [""]: return sidebar, contents.home.content
     elif path[:1] == ["mokiniai"]: return contents.mokiniai.sidebar, contents.mokiniai.content
-    elif path[:1] == ["roadmap"]: return sidebar, contents.roadmap.content
+    elif path[:1] == ["roadmap"]: return contents.roadmap.sidebar, contents.roadmap.content
     elif path[:1] == ["gallery"]: return contents.app_gallery.sidebar, contents.app_gallery.content
     else: return sidebar, JUMBOTRON(pathname)
 
-server = app.server
-#if __name__ == '__main__': app.run_server(debug=True, port = 8870)
+#server = app.server
+if __name__ == '__main__': app.run_server(debug=True, port = 8870)
 

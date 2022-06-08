@@ -1,7 +1,7 @@
 from dash import html, callback, Input, Output
 from utils.stylesheet import SIDEBAR_STYLE, JUMBOTRON
 import sidebars.mokiniai
-import contents.ugne_ir_mantas, contents.ieva
+import contents.ugne_ir_mantas, contents.ieva, contents.pijus
 
 content_children=html.P("sqrtmath - vieta, kur mokosi, kas tik nori")
 
@@ -18,5 +18,6 @@ def display_content(pathname):
     if path[:2] == ["mokiniai"]: return sidebar, content
     elif path[:2] == ["mokiniai", "ieva"]: return sidebar, contents.ieva.content
     elif path[:2] == ["mokiniai", "ugne_ir_mantas"]: return sidebar, contents.ugne_ir_mantas.content
+    elif path[:2] == ["mokiniai", "pijus"]: return sidebar, contents.pijus.content
     else: return sidebar, JUMBOTRON(pathname)
 
