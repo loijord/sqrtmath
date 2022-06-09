@@ -28,6 +28,6 @@ def render_page_content(pathname):
     elif path[:1] == ["gallery"]: return contents.app_gallery.sidebar, contents.app_gallery.content
     else: return sidebar, JUMBOTRON(pathname)
 
-server = app.server
-#if __name__ == '__main__': app.run_server(debug=True, port = 8870)
+#server = app.server
+if __name__ == '__main__': app.run_server(debug=True, port = 8870)
 
