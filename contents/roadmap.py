@@ -1,7 +1,7 @@
 from dash import html, callback, Input, Output
 from utils.stylesheet import SIDEBAR_STYLE, JUMBOTRON
 import sidebars.roadmap
-import contents.release_notes, contents.koncepcija, contents.part1
+import contents.release_notes, contents.koncepcija, contents.part1, contents.part2
 
 content_children=html.P("Ši skiltis skirta apžvelgti projekto koncepciją ir technines dalis")
 
@@ -19,6 +19,7 @@ def display_content(pathname):
     elif path[:2] == ["roadmap", "koncepcija"]: return sidebar, contents.koncepcija.content
     elif path[:2] == ["roadmap", "release_notes"]: return sidebar, contents.release_notes.content
     elif path[:2] == ["roadmap", "part1"]: return sidebar, contents.part1.content
+    elif path[:2] == ["roadmap", "part2"]: return sidebar, contents.part2.content
     #elif path[:2] == ["roadmap", "ugne_ir_mantas"]: return sidebar, contents.ugne_ir_mantas.content
     #elif path[:2] == ["roadmap", "pijus"]: return sidebar, contents.pijus.content
     else: return sidebar, JUMBOTRON(pathname)

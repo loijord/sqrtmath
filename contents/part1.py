@@ -34,7 +34,7 @@ teiginių ir taisyklių užrašymų. Keletas iškilusių sunkumų pavyzdžių:
 prireiktų naudoti komplikuotą teiginio užrašymą: $\begin{cases} a+b=2 \\ a=1 \end{cases}$. Jei taip aprašomų teiginių 
 sprendime pasitaiko daug, schema tampa perpildyta. 
 * Pasitaiko, kad dalis vieną teiginį sudarančių lygybių priklauso kitam kurioje nors sprendimo dalyje taikomam teiginiui. 
-Tokiu atveju būtų neišvengiama pasikartojamumo
+Tokiu atveju būtų neišvengiama pasikartojamumo.
 * Taisyklės taikymas pademonstruotam teiginiui gerokai supaprastėja, jei sprendžiantysis 
 mąsto apie tam tikrą kontekstą, pvz. apie šalį, kurioje yra du didmiesčiai, iš kurių dalis yra uostamiesčiai ($a+b=2$), 
 o jūra skalauja tik vieną iš jų ($a=1$). Tuomet lygčių arba lygčių sistemų sprendimas nebūtų reikalingas, užtektų teiginį
