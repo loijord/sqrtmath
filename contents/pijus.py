@@ -1,5 +1,5 @@
 from dash import html
-from utils.dry import distinquish_sections
+from utils.utils import distinquish_sections
 
 section1 = html.Div([html.H3('Kramtomoji guma, prilipusi prie dviračio rato'),
                        html.Iframe(width="630",

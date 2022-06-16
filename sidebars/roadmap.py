@@ -1,4 +1,4 @@
-from utils.dry import nav
+from utils.utils import nav
 from dash import html
 
 sections = [html.H2("Projekto planas"), html.Hr(),

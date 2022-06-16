@@ -10,10 +10,13 @@ import contents.app_gallery
 import sidebars.home
 from utils.stylesheet import SIDEBAR_STYLE, CONTENT_STYLE, JUMBOTRON
 
-app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP], suppress_callback_exceptions=True)
+app = dash.Dash(external_stylesheets=[
+    dbc.themes.BOOTSTRAP,
+    r'''https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'''], #5 star ranking system
+    suppress_callback_exceptions=True)
 location = dcc.Location(id="page-url", refresh=False)
-sidebar = html.Div(sidebars.home.sections, id="page-sidebar", style=SIDEBAR_STYLE)
-content = html.Div(id="page-content", style=CONTENT_STYLE)
+sidebar = html.Div(sidebars.home.sections, id="page-sidebar", className='sidebar')
+content = html.Div(id="page-content", className='content')
 app.layout = html.Div([location, sidebar, content])
 
 @callback(Output("page-sidebar", "children"),
@@ -28,6 +31,6 @@ def render_page_content(pathname):
     elif path[:1] == ["gallery"]: return contents.app_gallery.sidebar, contents.app_gallery.content
     else: return sidebar, JUMBOTRON(pathname)
 
-server = app.server
-#if __name__ == '__main__': app.run_server(debug=True, port = 8870)
+#server = app.server
+if __name__ == '__main__': app.run_server(debug=True, port = 8870)
 

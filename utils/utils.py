@@ -3,6 +3,15 @@ import dash_bootstrap_components as dbc
 import inspect
 import json
 
+class Markdown(dcc.Markdown):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.mathjax=True
+        self.dangerously_allow_html = True
+
+def add_spacing(html_element):
+    return html.Div([html.Br(), html_element, html.Br()])
+
 def nav(links):
     return dbc.Nav([dbc.NavLink(key, href=val, active="exact") for key, val in links.items()],
                    vertical=True, pills=True)
@@ -21,6 +30,14 @@ def render_ipynb(name):
     md_container = [dcc.Markdown(c['source'], mathjax=True, style={'width': '60%'}) for c in cells if c['cell_type']=='markdown']
     return distinquish_sections(md_container)
 
+
+def star_ranking(array, colors=('black', '#ffd700')):
+    elements = []
+    for n in array:
+        elements.append(html.I(
+            className="fa fa-star",
+            style={'color': colors[n], 'font-size': '24px'}))
+    return html.Div(elements)
 
 def nice_app_display(module):
     '''assume module has a content attribute and its not dash app, run it and display source code'''

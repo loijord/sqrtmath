@@ -1,8 +1,9 @@
 from dash import html, callback, Input, Output, dcc
 from utils.stylesheet import SIDEBAR_STYLE, JUMBOTRON
-from utils.dry import nice_app_display
+from utils.utils import nice_app_display
 import sidebars.gallery
-import gallery.html_object_collection, gallery.mokesciai, gallery.jumbotron, gallery.sidebar, gallery.interactive_graphs
+import gallery.html_object_collection, gallery.mokesciai, gallery.jumbotron, \
+    gallery.sidebar, gallery.interactive_graphs, gallery.multiindex_table
 
 
 content_children = dcc.Markdown("""Ši sekcija skirta pademonstruoti, kokius appsus galima sukurti naudojant
@@ -24,5 +25,6 @@ def display_content(pathname):
     elif path[:2] == ["gallery", "jumbotron"]: return sidebar, nice_app_display(gallery.jumbotron)
     elif path[:2] == ["gallery", "sidebar"]: return sidebar, nice_app_display(gallery.sidebar)
     elif path[:2] == ["gallery", "interactive_graphs"]: return sidebar, nice_app_display(gallery.interactive_graphs)
+    elif path[:2] == ["gallery", "multiindex_table"]: return sidebar, nice_app_display(gallery.multiindex_table)
     else: return sidebar, JUMBOTRON(pathname)
 

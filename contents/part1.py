@@ -1,77 +1,92 @@
 from dash import dcc, html
+import dash_bootstrap_components as dbc
+from utils.utils import Markdown, star_ranking, add_spacing #force to use mathjax by default
 from PIL import Image
 #)
-
 content = html.Div([
-    dcc.Markdown(r"""# Duomenų sistema, aprašanti uždavinius
+    html.H1('Duomenų sistema, aprašanti uždavinius'),
+    Markdown(r"""## Tikslas
+***Įvertinti, kokia duomenų struktūra būtų tinkamiausia aprašinėti teoremų įrodymams, 
+procedūrų ir taisyklių paaiškinimams bei uždavinių sprendimams.***"""),
+    Markdown(r"""## Kiek pasiektas tikslas:"""),
+    star_ranking((1, 1, 1, 1, 0)),
+    html.Br(),
+    Markdown(r"""## Kas nuveikta:
+* 2017/18 metais išbandytas struktūra, paremta, supaprastintą Toulmino argumentacijos modeliu
+* Paaiškėjo, kad ši struktūra nepakankamai lanksti norint ja remtis kuriant duomenų bazes
+* Vėliau buvo apsiribota atskirų sprendimo žingsnių užrašinėjimu rankomis
+* 2022 metų balandį pavyko realizuoti kitokią struktūrą, reprezentuojamą kryptiniais grafais"""),
+    html.Hr(),
+    Markdown(r"""### Toulmino argumentacijos modelis
 Spręsdami bet kokias iškilusias problemas žmonės yra linkę samprotauti pagal 
 [Toulmino argumentacijos modelį](https://en.wikipedia.org/wiki/Stephen_Toulmin#The_Toulmin_model_of_argument):
 
 ![](https://owl.purdue.edu/owl/general_writing/academic_writing/historical_perspectives_on_argumentation/images/20190305Toulmin4.jpg)
 
-Aprašinėjant matematinius sprendimus ant popieriaus pilnai pakanka iš tam tikrų faktų (facts) 
-išvesti teiginius (claims) ir juos pagrįsti (warrants). Likusiais procesais (backing, rebuttal, qualifier) 
-būtina operuoti prieš aprašant sprendimą. Trumpai tariant, sprendimo procesas susideda iš dviejų dalių:
-* Euristinio samprotavimo - intuityvios mąstymo dalies, kuomet bandome sugalvoti sprendimo būdų
-* Dedukcinio samprotavimo - mąstymo dalies, kai sprendimas apibūdinimas naudojant tvirtus nuoseklius 
-tam tikrų teiginių pagrindimus.
+Aprašinėjant matematinius sprendimus ant popieriaus pilnai pakanka iš tam tikrų faktų (Grounds) 
+išvesti teiginius (Claims) ir įvardyti, kaip jie grindžiami (Warrants). Likę procesai (Backing, Rebuttal, Qualifier) 
+sprendimo užrašyme dažniausiai neatsispindi, tačiau yra svarbi samrotavimo dalis. Apibendrinus:
 
-2017/18 metais supratau, kad norint aprašyti bet kurio matematinio uždavinio sprendimą, 
-iš esmės užtektų jį ,,sujungti" iš tokių dalių: 
+* $[\text{Backing} +\text{Rebuttal} + \text{Qualifier}] = \text{Euristinis samprotavimas}$ (artima matematinei intuicijai)
+* $[\text{Grounds } \& \text{ Warrants} \longrightarrow \text{Claims}] = \text{Dedukcinis samprotavimas}$ (artima griežtam pagrindimui)."""),
+    Markdown(r"""### Supaprastintas Toulmino argumentacijos modelis
+Norint aprašyti bet kurio matematinio uždavinio sprendimą, iš esmės užtektų jį ,,sujungti" iš tokių dalių: 
 
 $\boxed{\text{Vienas teiginys}} \stackrel{\begin{array}{c}\boxed{\text{Taisyklė}} \\ 
-\big\downarrow \end{array}}{\longrightarrow} \boxed{\text{Kitas teiginys}}$
+\big\downarrow \end{array}}{\longrightarrow} \boxed{\text{Kitas teiginys}}$"""),
 
-Kaip pavyzdį paėmiau nagrinėti Pitagoro teoremos įrodymą ir gavau tokią schemą:""",
-                 mathjax=True, style={'width': '60%'}),
-html.Img(src=Image.open("assets/pitagoro_demo.png"), style={'width': '60%'}),
-dcc.Markdown(r"""Vėliau taip pat pagal šį modelį nubrėžiau lygybės 
-$(a^n)^m = a^{nm}$ įrodymo schemą:""", mathjax=True, style={'width': '60%'}),
-html.Img(src=Image.open("assets/laipsniu_demo.png"), style={'width': '60%'}),
-dcc.Markdown(r"""Dar vėliau paaiškėjo, kad šis modelis nėra toks lankstus, kaip atrodo. Taikant siūlomą būdą aprašyti sprendimus kiekviename uždavinyje kildavo daug klausimų dėl 
+    Markdown(r"""**Pavyzdys 1.** Pitagoro teoremos įrodymo pavaizdavimas remiantis šia struktūra:"""),
+    add_spacing(html.Img(src=Image.open("assets/pitagoro_demo.png"))),
+    Markdown(r"""**Pavyzdys 2.** Lygybės $(a^n)^m = a^{nm}$ įrodymo schema:"""),
+    add_spacing(html.Img(src=Image.open("assets/laipsniu_demo.png"))),
+
+    Markdown(r"""### Supaprastinto Toulmino argumentacijos modelio taikymas"""),
+    Markdown(r"""Su laiku paaiškėjo, kad šis modelis nėra toks lankstus, kaip atrodo. 
+Taikant siūlomą būdą aprašyti sprendimus kiekviename uždavinyje kildavo daug klausimų dėl 
 teiginių ir taisyklių užrašymų. Keletas iškilusių sunkumų pavyzdžių: 
 * Jei duota, kad $a+b=2$ ir $a=1$, tai pagal tam tikrą taisyklę gausime $b=1$. Šiuo atveju norint aprašyti tai, kas duota,
 prireiktų naudoti komplikuotą teiginio užrašymą: $\begin{cases} a+b=2 \\ a=1 \end{cases}$. Jei taip aprašomų teiginių 
-sprendime pasitaiko daug, schema tampa perpildyta. 
+sprendime pasitaiko daug, `schema tampa perpildyta`. 
 * Pasitaiko, kad dalis vieną teiginį sudarančių lygybių priklauso kitam kurioje nors sprendimo dalyje taikomam teiginiui. 
-Tokiu atveju būtų neišvengiama pasikartojamumo.
+Tokiu atveju `schemoje neišvengiama pasikartojimų`.
 * Taisyklės taikymas pademonstruotam teiginiui gerokai supaprastėja, jei sprendžiantysis 
 mąsto apie tam tikrą kontekstą, pvz. apie šalį, kurioje yra du didmiesčiai, iš kurių dalis yra uostamiesčiai ($a+b=2$), 
 o jūra skalauja tik vieną iš jų ($a=1$). Tuomet lygčių arba lygčių sistemų sprendimas nebūtų reikalingas, užtektų teiginį
-matyti kita forma, kaip tai įprasta pradinukams. Kyla natūralus klausimas, 
-kurį iš šių sprendimo būdų verta rinktis aprašinėjant sprendimą, ir ar šiuos du sprendimo būdus laikyti skirtingais?
+matyti kita forma, kaip tai įprasta pradinukams. Tampa nelengva nuspręsti, `kada du sprendimo būdai laikomi skirtingais?`
 
 2021 m. kovo mėnesį viename iš 
 [Matematikos švietimo centro](http://mif.vu.lt/lt3/mokslas/projektai/163-lt/institutai/matematikos#centro-veiklos) 
-organizuojamų seminarų pristačiau savo tuometinę koncepciją apie mokyklinio matematikos turinio 
-sudarymą ir nuoseklų išdėstymą remiantis taikant panašias struktūras surinkta informacija apie dedukcinį ryšį ir 
-moksleivių pasiekimus. Skaidrės prieinamos adresu: 
+organizuojamų seminarų pristačiau savo tuometines idėjas, kaip būtų galima sudaryti ir nuosekliai išdėstyti mokyklinį 
+matematikos turinį remiantis matematinių taisyklių tarpusavio ryšiu pagal supaprastintą Toulmino modelį ir 
+moksleivių gebėjimais taikyti schemose įtrauktas taisykles. Skaidrės prieinamos adresu: 
 
 [https://github.com/loijord/matematikos_pamokos/blob/master/kraitis/teorija_to_praktika/skaidruoles.pdf]
 (https://github.com/loijord/matematikos_pamokos/blob/master/kraitis/teorija_to_praktika/skaidruoles.pdf)
 
 Skaidrėse įvardijau ir kitus iššūkius:
 
-* Uždavinių su keliais sprendimais aprašymas yra technologiškai kur kas sunkiau įgyvendinamas
-* Kai kurie samprotavimo principai yra sunkiai aprašomi. Pavyzdžiui įrodymas prieštaros būdu arba 
-*Modus Ponens* loginis principas
+* Uždavinių su `keliais sprendimais` aprašymas yra technologiškai kur kas sunkiau įgyvendinamas
+* `Sudėtingesni samprotavimo principai` yra sunkiau aprašomi. Pavyzdžiui įrodymas prieštaros būdu arba 
+*Modus Ponens* loginis principas"""),
  
-2022 metų balandį radau lankstesnį būdą pavaizduoti uždavinių sprendimui. 
-Kaip pavyzdį nagrinėjau geometrijos uždavinį, kuriame reikia įrodyti, kad sujungus bet kurio keturkampio gretimų 
-kraštinių vidurio taškus gausime lygiagretainį:""", mathjax=True, style={'width': '60%'}),
-html.Img(src=Image.open("assets/netgraph_demo.jpg"), style={'width': '40%'}),
-dcc.Markdown("""Ankstesnėje schemoje rodyklės kartais būdavo nukreipiamos į kitas rodykles taip parodant, 
-kad norint pritaikyti tam tikrą sudėtingesnę taisyklę reikia taikyti kitus nesudėtingus teiginius 
-ar paprastesnes taisykles. Šiame modelyje susitarta, kad rodyklės gali eiti tik iš vieno teiginio į kitą. 
-Kiekvieno uždavinio sprendimą siūloma aprašinėti kaip kryptinį grafą, kurio viršūnių pavadinimai 
-yra teiginiai, o briaunų, nukreiptų į tą pačią viršūnę, grupės atitinka, kažkurią vieną taisyklę.
+    Markdown(r"""Kryptinių grafų modelis
+Dalis `paryškintų` problemų išsisprestų, jei kiekvieną sprendimo žingsnio taisyklę 
+vaizduotume kaip kryptinio grafo briaunų rinkinį, išeinantį iš grupės teiginių ir nukreiptų į vienodą išvestinį teiginį.
+Šioje struktūroje susitarta, kad rodyklės negali eiti į briaunas, o tik į viršūnes, 
+todėl ją galima laikyti pilnaverčiu grafu"""),
 
-Praėjus mėnesiui pavyko atrasti ir techninį būdą tokius grafus interaktyviai vaizduoti (*žr. Home -> App Gallery -> Interactive Graphs*). Grafai yra plačiai naudojama duomenų struktūra, 
-žadanti daug galimybių, tame tarpe ir automatinį sprendimo generavimą naudojant kelio iš duotų duomenų į 
-ieškomus duomenis paiešką. Norint taikyti tokius algoritmus būtina turėti tvarkingai aprašytus grafus. 
-Štai taip atrodo automatiškai iš pateikto grafo sugeneruotas sprendimas:""",
-             mathjax=True, style={'width': '60%'}),
-html.Img(src=Image.open("assets/solution_demo.jpg"), style={'width': '60%'}),
-dcc.Markdown('''Kitoje dalyje nagrinėsime, kas turėtų įeiti į duomenų bazę, 
-pakankamą aprašyti mokyklinės matematikos mokomąją medžiagą ir teikti moksleiviams informaciją apie jų gebėjimus''',
-             mathjax=True, style={'width': '60%'})])
+    Markdown(r"""**Pavyzdys 3.** Reikia įrodyti, kad sujungus bet kurio keturkampio gretimų 
+kraštinių vidurio taškus gausime lygiagretainį:"""),
+add_spacing(html.Img(src=Image.open("assets/netgraph_demo.jpg"))),
+
+    Markdown(r"""Sekcijoje (Home -> App Gallery -> Interactive Graphs) siūlomas sprendimas, kaip šį grafą pavaizduoti įskaitomiau."""),
+
+    Markdown(r"""Ieškant būdų, kaip padėti moksleiviams išmokti tam tikrą temą, tvarkingas grafų aprašymas atvertų daug galimybių:
+* Tiriant pasikartojančius pografius būtų galima nustatyti matematinių objektų, taisyklių ar jų rinkinių 
+pasiskirstymą
+* Leistų efektyviai identifikuoti moksleivio spragas
+* Identifikavus spragas leistų automatiškai nukreipti į konkrečią mokymosi medžiagą.
+* Uždavinių sprendimus generuoti automatiškai"""),
+    Markdown(r"""**Pavyzdys 4.** Automatiškai sugeneruoto sprendimas:"""),
+    add_spacing(html.Img(src=Image.open("assets/solution_demo.jpg")))
+])
