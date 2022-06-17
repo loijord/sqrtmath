@@ -10,7 +10,7 @@ import contents.app_gallery
 import sidebars.home
 from utils.stylesheet import SIDEBAR_STYLE, CONTENT_STYLE, JUMBOTRON
 
-app = dash.Dash(external_stylesheets=[
+app = dash.Dash(__name__, external_stylesheets=[
     dbc.themes.BOOTSTRAP,
     r'''https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'''], #5 star ranking system
     suppress_callback_exceptions=True)
