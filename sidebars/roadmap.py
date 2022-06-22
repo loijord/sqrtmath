@@ -6,4 +6,5 @@ sections = [html.H2("Projekto planas"), html.Hr(),
                 "Koncepcija": "/roadmap/koncepcija",
                 "Release notes": "/roadmap/release_notes",
                 "Part 1: uždavinių aprašymas": "/roadmap/part1",
-                "Part 2: duomenų bazės kūrimas": "/roadmap/part2"})]
+                "Part 2: duomenų bazės kūrimas": "/roadmap/part2",
+                "Part 3: duomenų įvedimas": "/roadmap/part3"})]

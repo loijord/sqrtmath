@@ -3,7 +3,7 @@ from utils.stylesheet import SIDEBAR_STYLE, JUMBOTRON
 from utils.utils import nice_app_display
 import sidebars.gallery
 import gallery.html_object_collection, gallery.mokesciai, gallery.jumbotron, \
-    gallery.sidebar, gallery.interactive_graphs, gallery.multiindex_table
+    gallery.sidebar, gallery.interactive_graphs, gallery.multiindex_table, gallery.chained_dropdowns
 
 
 content_children = dcc.Markdown("""Ši sekcija skirta pademonstruoti, kokius appsus galima sukurti naudojant
@@ -26,5 +26,6 @@ def display_content(pathname):
     elif path[:2] == ["gallery", "sidebar"]: return sidebar, nice_app_display(gallery.sidebar)
     elif path[:2] == ["gallery", "interactive_graphs"]: return sidebar, nice_app_display(gallery.interactive_graphs)
     elif path[:2] == ["gallery", "multiindex_table"]: return sidebar, nice_app_display(gallery.multiindex_table)
+    elif path[:2] == ["gallery", "chained_dropdowns"]: return sidebar, nice_app_display(gallery.chained_dropdowns)
     else: return sidebar, JUMBOTRON(pathname)
 

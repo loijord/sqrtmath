@@ -20,8 +20,7 @@ def display_content(pathname):
     elif path[:2] == ["roadmap", "release_notes"]: return sidebar, contents.release_notes.content
     elif path[:2] == ["roadmap", "part1"]: return sidebar, contents.part1.content
     elif path[:2] == ["roadmap", "part2"]: return sidebar, contents.part2.content
-    #elif path[:2] == ["roadmap", "ugne_ir_mantas"]: return sidebar, contents.ugne_ir_mantas.content
-    #elif path[:2] == ["roadmap", "pijus"]: return sidebar, contents.pijus.content
+    elif path[:2] == ["roadmap", "part3"]: return sidebar, contents.part3.content
     else: return sidebar, JUMBOTRON(pathname)
 
 

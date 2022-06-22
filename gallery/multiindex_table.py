@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 from dash import html
+# More about this giant step: https://community.plotly.com/t/dash-datatable-multi-index-tables-in-dash/6386/10
 
 # ADJUST STYLES
 table_style = {'border': '3px solid'}
@@ -25,7 +26,7 @@ header_column_cell_style = {'text-align': 'right',
                      'font-weight': 'bold'}
 
 # CREATE TABLE MANUALLY (thanks to pd.to_html)
-table = html.Table([
+dash_multitable = html.Table([
             html.Thead([
                 html.Tr([
                     html.Th('Country', style=header_index_cell_style),
@@ -166,6 +167,8 @@ content = html.Div([html.H4('pd.DataFrame to html by pandas'),
                                 height="500",
                                 sandbox='',
                                 srcDoc=df.to_html()),
-                    html.H4('pd.DataFrame to html in a custom way'),
+                    html.H4('pd.DataFrame to html in a manual way'),
+                    dash_multitable,
+                    html.H4('pd.DataFrame to html in an automated way'),
                     multiindex_table(df),
                     ])

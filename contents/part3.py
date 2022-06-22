@@ -4,35 +4,39 @@ from utils.utils import Markdown, star_ranking, add_spacing, \
     multiindex_table, nested_df, force_multiline
 from PIL import Image
 
-#force_multiline([r'\text{Pirma}',r'\text{Antra } x^2+y^2',r'\text{Trečia}'], text_mode=False)
+# force_multiline([r'\text{Pirma}',r'\text{Antra } x^2+y^2',r'\text{Trečia}'], text_mode=False)
 
-d = {'Known': {'n':('Teiginio, kuris yra duotas sąlygoje, id', 'Numeriai nuo 1 iki 5'),
-               'fr':(r'Pradinė teiginio forma', 'Viena lygiagretainio įstrižainė lygi x'),
-               'to':(r'Galutinė teiginio forma, rašoma sprendime', 'AB = x'),
-               'by':(r'Priskyrimas, pagal kurį pradinė teiginio forma susiveda į galutinę', 'Formos "A lygu B" sakinys užrašomas: A = B')},
+d = {'Known': {'n': ('Teiginio, kuris yra duotas sąlygoje, id', 'Numeriai nuo 1 iki 5'),
+               'fr': (r'Pradinė teiginio forma', 'Viena lygiagretainio įstrižainė lygi x'),
+               'to': (r'Galutinė teiginio forma, rašoma sprendime', 'AB = x'),
+               'by': (r'Priskyrimas, pagal kurį pradinė teiginio forma susiveda į galutinę',
+                      'Formos "A lygu B" sakinys užrašomas: A = B')},
      'Unknown': {'n': ('Duomens, kurį reikia rasti, id', 'Numeris 6'),
                  'fr': ('Pradinė duomens, forma', 'Rakite lygiagretainio perimetrą'),
                  'to': ('Galutinė duomens forma, rašoma sprendime', DL('$P_{XYZT}$')),
-                 'by': ('Priskyrimas, pagal kurį pradinė teiginio forma susiveda į galutinę', DL('Figūros $X$ perimetras žymimas: $P_X$'))},
+                 'by': ('Priskyrimas, pagal kurį pradinė teiginio forma susiveda į galutinę',
+                        DL('Figūros $X$ perimetras žymimas: $P_X$'))},
      'Ifthen': {'n': ('Sprendimo žingsnio numeris', 'Numeriai nuo 7'),
-                'fr': ('Teiginių grupė, naudojama atlikti sprendimo žingsniui','(11, 12, 13, 14)'),
-                'carrier':('Nuoseklus sprendimo žingsnio užrašymas', DL(r'$P_{XYZT}=XY+ZT+XY+ZT=\frac{x}{2}+\frac{x}{2}+\frac{y}{2}+\frac{y}{2}=x+y$')),
-                'by':('Teiginys, kurį taikant išvedimas yra galimas', 'Perimetro apibrėžimas'),
-                'to':('Teiginys, išvestas sprendimo žingsnyje', DL('P_{XYZT} = x + y')),
-                'ask':('Klausimas, į kurį reikia atsakyti, norint užrašyti sprendimo žingsnį','Kam lygus lygiagretainio XYZT perimetras?'),
-                'background':('Papildomos taisyklės, per lengvos kitų taisyklių kontekste, kad būtų įtrauktos į planą arba nebūtinos taikyti', 'Trupmenų su vienodais vardikliais sudėtis')}}
+                'fr': ('Teiginių grupė, naudojama atlikti sprendimo žingsniui', '(11, 12, 13, 14)'),
+                'carrier': ('Nuoseklus sprendimo žingsnio užrašymas',
+                            DL(r'$P_{XYZT}=XY+ZT+XY+ZT=\frac{x}{2}+\frac{x}{2}+\frac{y}{2}+\frac{y}{2}=x+y$')),
+                'by': ('Teiginys, kurį taikant išvedimas yra galimas', 'Perimetro apibrėžimas'),
+                'to': ('Teiginys, išvestas sprendimo žingsnyje', DL('P_{XYZT} = x + y')),
+                'ask': ('Klausimas, į kurį reikia atsakyti, norint užrašyti sprendimo žingsnį',
+                        'Kam lygus lygiagretainio XYZT perimetras?'),
+                'background': (
+                'Papildomos taisyklės, per lengvos kitų taisyklių kontekste, kad būtų įtrauktos į planą arba nebūtinos taikyti',
+                'Trupmenų su vienodais vardikliais sudėtis')}}
 
 df = nested_df(d)
 df.index.set_names(['Klasė', 'Parametras'], inplace=True)
 df.columns = ['Kam skirtas parametras', 'Naudojimo pavyzdžiai']
 dash_multitable = multiindex_table(df,
-    body_column_cell_style = {
-    'text-align': 'left',
-    'border': '1px solid grey',
-    'font-size': '12px',
-    'backgroundColor': 'rgb(210, 255, 210)'})
-
-
+                                   body_column_cell_style={
+                                       'text-align': 'left',
+                                       'border': '1px solid grey',
+                                       'font-size': '12px',
+                                       'backgroundColor': 'rgb(210, 255, 210)'})
 
 content = html.Div([
     html.H1('Duomenų bazės kūrimas'),
@@ -64,19 +68,19 @@ kartais paaiškinta, kokia taisykle remiamasi
   * Gebėjimas - kompetencija, kurios reikia norint atsakyti į klausimą"""),
     Markdown(r""" **Naudota sprendimo struktūra:**"""),
     add_spacing(html.Img(src=Image.open("assets/part2_ex1.png"))),
-dcc.Markdown(r"""### Paprasčiausios duomenų bazės užklausos
+    dcc.Markdown(r"""### Paprasčiausios duomenų bazės užklausos
 Prijungus informaciją apie moksleivio rezultatus buvo galima pateikti, kokių kompetencijų reikia tam tikram testui ir 
 kaip moksleivis jas atitinka:"""),
-html.Img(src=Image.open("assets/part2_ex2.png")),
-dcc.Markdown(r"""### Patobulinta versija
+    html.Img(src=Image.open("assets/part2_ex2.png")),
+    dcc.Markdown(r"""### Patobulinta versija
 
 Pagal atnaujintą 2022 metų modelį uždavinių sprendimų aprašymas turėtų teikti detalesnių žinių 
 apie teste esančių uždavinių sandarą ir moksleivių gebėjimus, nei rankomis įvesti gebėjimų pavadinimai. Kompetencijų pavadinimų įvedinėjimas rankomis 
 turės būti pakeistas iš apibrėžimų, taisyklių ir kt., pasirinkimu iš viešai prieinamos rodyklės. 
 Tuomet sprendimo žingsniai atrodytų taip:"""
-),
-add_spacing(html.Img(src=Image.open("assets/solution_demo.jpg"))),
-Markdown(r"""### Patobulintos versijos analizė
+                 ),
+    add_spacing(html.Img(src=Image.open("assets/solution_demo.jpg"))),
+    Markdown(r"""### Patobulintos versijos analizė
 Norint pasiekti tikslą, reiktų pradėti nuo bent vieno veikiančio kodo pavyzdžio analizės. 
 Pavaizduotam sprendimui pateikti buvo pasinaudota kodu:
 
@@ -141,8 +145,8 @@ sprendimo žingsniuose, o likusios - pateiktiems ir ieškomiems duomenims.
 
 Pateikto kodo variantas turės būti supaprastintas siekiant paprastumo ir lankstumo duomenų struktūros modifikavimui. 
 Kol kas siekiant aiškiai apibrėžti kode naudojamus parametrus remsimės hierarchine lentele:"""),
-add_spacing(dash_multitable),
-Markdown(r"""* Kuriant tikslų duomenų bazės aprašymą vienas iš pagr. uždavinių - nustatyti kaip sudėtingesni parametrai priklauso nuo klasių. Pvz.:
+    add_spacing(dash_multitable),
+    Markdown(r"""* Kuriant tikslų duomenų bazės aprašymą vienas iš pagr. uždavinių - nustatyti kaip sudėtingesni parametrai priklauso nuo klasių. Pvz.:
   * `fr` gali atitikti nurodytą teiginį, nežinomąjį arba teiginių id grupę.
   * `ask` atitinka klausimą, į kurį reikia atsakyti, norint užrašyti sprendimo žingsnį. 
 Tačiau sprendžiant tekstinius uždavinius būna sunku pastebėti ir užrašyti tam tikrą sąlygą. Dėl šios priežasties yra 
@@ -168,10 +172,9 @@ skeliamas į daugiau dalių, tas taisykles priskiriant tų dalių `fr` atributam
   * **Procesas**, pvz. procedūrų rinkinys, taikomas iš tam tikros lygties gauti sprendinį
   * **Realaus pasaulio kontekstas**, pvz. jei iš skirtingų vietų pajudėję žmonės susitiko pusiaukelėje, 
   tai iki susitikimo jie užtruko vienodai laiko.
-  
+
 * Vėliau bus galima pasvarstyti ir apie duomenų bazių valdymo sistemų teorijoje naudojamą
 esybių-ryšių diagramą ir duomenų bazės schemą. Šių diagramų pavyzdžius galima peržiūrėti MIF duomenų bazių valdymo 
 sistemų laboratorinio darbo sprendime 
 [GitHub nuorodoje](https://nbviewer.org/github/loijord/DBVS/blob/master/DBVS2.ipynb) """)
 ])
-

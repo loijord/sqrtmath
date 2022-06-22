@@ -8,4 +8,5 @@ sections = [html.H2("App Gallery"), html.Hr(),
                 "Jumbotron": "/gallery/jumbotron",
                 "Sidebar": "/gallery/sidebar",
                 "Interaktyvūs grafai": "/gallery/interactive_graphs",
-                "Hierarchinės lentelės": "/gallery/multiindex_table"})]
+                "Hierarchinės lentelės": "/gallery/multiindex_table",
+                "Chained dropdowns": "/gallery/chained_dropdowns"})]
